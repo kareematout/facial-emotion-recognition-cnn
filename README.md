@@ -42,7 +42,26 @@ Facial expressions convey non-verbal signals commonly grouped into seven basic e
 
 ---
 
-## Data Collection Plan (two parts)
+## Dataset Responsibility
+
+This project uses two datasets, with each partner responsible for one dataset:
+
+- **RAF-DB (Real-world Affective Faces Database)**: Handled by **Kareem Atout**
+  - Location: `data/rafdb/`
+  - Preprocessing notebook: `notebooks/01_data_preprocessing_rafdb.ipynb`
+  - 7-class emotion recognition (Surprise, Fear, Disgust, Happiness, Sadness, Anger, Neutral)
+  - Only RAF-DB preprocessing is implemented in this branch
+
+- **FER2013**: Handled by **Muhammad Kamran Khan**
+  - Location: `data/fer2013/`
+  - Preprocessing notebook: `notebooks/02_data_preprocessing_fer2013.ipynb` (to be implemented)
+  - 7-class emotion recognition (same emotion categories as RAF-DB)
+
+Both datasets will be standardized to the same 7-class label schema for consistent model training and evaluation.
+
+---
+
+## Data Collection Plan
 
 ### Muhammad Kamran Khan — Dataset-A (FER2013)
 - Access: Public academic dataset.
@@ -52,24 +71,36 @@ Facial expressions convey non-verbal signals commonly grouped into seven basic e
   - Augmentations: random horizontal flip, small rotation, brightness/contrast jitter, Gaussian blur, random occlusion patch.
 
 ### Kareem Atout — Dataset-B (RAF-DB Basic 7-class)
-- Access: Download per dataset terms to data/rafdb/raw/.
+- Access: Download per dataset terms to `data/rafdb/`.
 - Preparation:
   - Face crop/alignment if provided; resize/normalize identically to Dataset-A; create train/val/test splits.
-  - Augmentations: mirror Dataset-A’s policy for fair robustness comparison.
+  - Augmentations: mirror Dataset-A's policy for fair robustness comparison.
 
-Data Access Statement:
-This repository does not include data files. Expected layout after prep:
-    ```text
-    data/
-      fer2013/
-        train/
-        val/
-        test/
-      rafdb/
-        train/
-        val/
-        test/
-    ```
+### Data Access Statement
+
+**This repository does not include data files.** Datasets must be downloaded separately according to their respective terms of use.
+
+**Expected layout after preprocessing:**
+```text
+data/
+  fer2013/
+    train/
+    val/
+    test/
+  rafdb/
+    DATASET/
+      train/
+      test/
+    train_labels.csv
+    test_labels.csv
+  metadata/
+    targets_map_rafdb.json
+    split_counts_rafdb.csv
+    dataset_stats_rafdb.json
+    *.png (visualizations)
+```
+
+**Note:** The `data/` directory is excluded from version control via `.gitignore` to avoid committing large files.
     
 ---
 
@@ -111,10 +142,79 @@ This repository does not include data files. Expected layout after prep:
 
 ---
 
+## Quick Start: RAF-DB Preprocessing
+
+### Prerequisites
+
+1. **Install dependencies:**
+   ```bash
+   pip install torch torchvision numpy pandas scikit-learn matplotlib
+   ```
+
+2. **Download RAF-DB dataset:**
+   - Download the RAF-DB Basic dataset according to the dataset terms
+   - Place it in `data/rafdb/` with the following structure:
+     ```
+     data/rafdb/
+       DATASET/
+         train/
+           1/  (Surprise)
+           2/  (Fear)
+           3/  (Disgust)
+           4/  (Happiness)
+           5/  (Sadness)
+           6/  (Anger)
+           7/  (Neutral)
+         test/
+           [same structure]
+       train_labels.csv
+       test_labels.csv
+     ```
+
+### Running the Preprocessing Notebook
+
+1. **Open the preprocessing notebook:**
+   ```bash
+   jupyter notebook notebooks/01_data_preprocessing_rafdb.ipynb
+   ```
+
+2. **Run all cells** to:
+   - Verify dataset structure
+   - Analyze label distribution
+   - Create train/validation/test splits
+   - Generate EDA visualizations
+   - Save metadata files
+
+### Output Files
+
+After running the preprocessing notebook, the following files will be generated in `data/metadata/`:
+
+- `targets_map_rafdb.json`: Label mappings for RAF-DB
+- `split_counts_rafdb.csv`: Per-class image counts for each split
+- `dataset_stats_rafdb.json`: Overall dataset statistics
+- `label_distribution.png`: Visualization of label distributions
+- `sample_images.png`: Sample images from each emotion class
+- `preprocessing_example.png`: Example of preprocessing pipeline
+
+See `docs/rafdb_data_summary.md` for a detailed report.
+
+---
+
 ## Reproducibility
 
-Environment:
+### Environment
+
 Python 3.10+, PyTorch, torchvision, numpy, pandas, scikit-learn, matplotlib.
 
-Determinism:
-Set seeds for random, numpy, and torch.
+### Determinism
+
+Set seeds for random, numpy, and torch in all notebooks to ensure reproducibility:
+```python
+import numpy as np
+import random
+import torch
+
+np.random.seed(42)
+random.seed(42)
+torch.manual_seed(42)
+```

@@ -207,7 +207,7 @@ marimo/_lsp/
 __marimo__/
 
 # Data / outputs
-data/
+/data/
 datasets/
 outputs/
 runs/

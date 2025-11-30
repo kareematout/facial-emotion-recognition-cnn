@@ -1,0 +1,38 @@
+{
+  "emotion_to_label": {
+    "angry": 0,
+    "disgust": 1,
+    "fear": 2,
+    "happy": 3,
+    "sad": 4,
+    "surprise": 5,
+    "neutral": 6
+  },
+  "label_to_emotion": {
+    "0": "angry",
+    "1": "disgust",
+    "2": "fear",
+    "3": "happy",
+    "4": "sad",
+    "5": "surprise",
+    "6": "neutral"
+  },
+  "fer2013_to_standard": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 6
+  },
+  "fer2013_labels": [
+    "angry",
+    "disgust",
+    "fear",
+    "happy",
+    "sad",
+    "surprise",
+    "neutral"
+  ]
+}

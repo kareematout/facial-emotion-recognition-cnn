@@ -1,0 +1,36 @@
+{
+  "timestamp": "20251203_210934",
+  "config": {
+    "image_size": 64,
+    "num_classes": 7,
+    "batch_size": 32,
+    "num_epochs": 30,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "dropout_rate": 0.5,
+    "patience": 7,
+    "use_augmentation": true
+  },
+  "rafdb": {
+    "test_accuracy": 0.8213820078226858,
+    "test_f1": 0.7301113540972758,
+    "test_loss": 0.5225040415275206,
+    "epochs_trained": 30
+  },
+  "fer2013": {
+    "test_accuracy": 0.6680133741989412,
+    "test_f1": 0.6343500257348601,
+    "test_loss": 0.9071278466292164,
+    "epochs_trained": 30
+  },
+  "cross_dataset": {
+    "rafdb_on_fer2013": {
+      "accuracy": 0.23655614377263862,
+      "f1": 0.1704626708331998
+    },
+    "fer2013_on_rafdb": {
+      "accuracy": 0.37353324641460234,
+      "f1": 0.1630678137261144
+    }
+  }
+}

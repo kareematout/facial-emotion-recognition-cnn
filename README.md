@@ -200,6 +200,40 @@ See `docs/rafdb_data_summary.md` for a detailed report.
 
 ---
 
+## Future Work & Potential Extensions
+
+If we were to continue working on this project, we would pursue the following updates and improvements:
+
+### Model Architecture & Training
+- **Transfer Learning**: Experiment with pre-trained models (ResNet, EfficientNet, Vision Transformers) and compare with our from-scratch CNN
+- **Ensemble Methods**: Combine predictions from models trained on both datasets to improve robustness
+- **Advanced Augmentation**: Implement mixup, cutmix, and AutoAugment strategies for better generalization
+- **Hyperparameter Optimization**: Systematic grid/random search or Bayesian optimization for learning rates, dropout, batch sizes
+
+### Cross-Dataset Analysis
+- **Domain Adaptation**: Implement domain adversarial training or other domain adaptation techniques to reduce domain shift
+- **Multi-Dataset Training**: Train a single model jointly on both datasets to leverage combined data diversity
+- **Fine-tuning Experiments**: Pre-train on one dataset and fine-tune on the other to study transfer learning effectiveness
+
+### Interpretability & Analysis
+- **Attention Mechanisms**: Add attention layers to visualize which facial regions the model focuses on
+- **GradCAM Visualizations**: Generate heatmaps showing important regions for each prediction
+- **Failure Case Analysis**: Deep dive into misclassified samples to understand model limitations
+- **Bias Analysis**: Investigate potential demographic biases (age, gender, ethnicity) in model predictions
+
+### Real-World Applications
+- **Real-Time Inference**: Optimize model for edge deployment with quantization and pruning
+- **Video Analysis**: Extend to temporal emotion recognition using video sequences (LSTM/Transformer on top of CNN features)
+- **Multi-Modal Fusion**: Incorporate audio features or physiological signals for more robust emotion recognition
+- **User Interface**: Build a web application or mobile app for live emotion detection demos
+
+### Dataset Expansion
+- **Additional Datasets**: Include more emotion datasets (AffectNet, ExpW, CK+) for better generalization
+- **Custom Data Collection**: Gather and annotate a diverse dataset with controlled demographics and lighting conditions
+- **Synthetic Data**: Generate synthetic facial expressions using GANs or diffusion models for data augmentation
+
+---
+
 ## Reproducibility
 
 ### Environment
